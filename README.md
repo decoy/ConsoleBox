@@ -19,8 +19,7 @@ The third layer consists of "Widgets".  These wrap the elements and help with ma
 
 In action:
 
-![Console Box](https://decoy.github.com/consolebox/consolebox.gif)
-
+![Console Box](consolebox.gif)
 
 ## What it would take to be useable
 
