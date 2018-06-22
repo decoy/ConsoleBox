@@ -1,0 +1,125 @@
+﻿termdb parsing
+- windows default is just documented example + special characters (might be a manual process ugh.)
+- others will have to parse correctly... pull code from consolepal/termbox-go
+- simplify char mapping registrations
+-- pass emitter?
+-- allow external registrations? or all handled inside the box?
+-- emitter is such a strange thing...
+- key combo handling elsewhere?
+
+color conversion fixes. (consolecolor => color => consolecolor should all match)
+- faster color lookups (probably just need a lookup table of some sort)
+
+textinput
+- cursor where click.
+- combo keys? (ctrl+a, etc.)
+
+border headers
+- panel comp with abs positioned labels on top of the border?
+- alignment handles the rest...
+
+break mouse events out into multiple elements?
+
+onhoverchange
+onfocuschange
+
+size widgets support percents?
+- progress bar
+- change other to 'constraint' widget?
+- allow for a custom size type? for percentages and such?
+- could parse... that'd be interesting
+- percent could ovveride... hrm... 
+
+named widgets with multiple states??
+- hovered, textfield, yuck?
+- state tracker could do name + type as key
+- box(states, name);
+
+# styling widgets
+- decorators on stateful widgets
+- tree walking on widgets (interface/class for parentable widgets)
+-- stateful + child/children?
+-- all widgets could just have children... expose via constructor or accessors
+-- only 'getchildren' is in the abstract/interface?
+-- allows for some interesting tree walking
+-- 'decorator' widgets that always do single child
+-- layoutwidgets for 'children'
+-- all items can have an ID
+-- selectors
+- all widgets could accept decorators? hrm...
+- need a way of applying decorators w/out breaking later styles
+- multiple styles per item, etc.  (CSS)
+
+id, classes, children on all
+- 'decorators' - keyed? of type?
+theme - where(selector for type, etc.).theme(i);
+'decorator' style - applies items to the widget but only on theme, no post.
+- how to handle multiple themes? - original tree vs later?
+-- could just inject into the build
+
+// applies using magic?
+idecorate.decorate(child);
+- problematic - have to build the child, then wrap it, then build everything _again_
+- stateful will just have to handle...
+- hrm... or another way to 'inject' that moment?
+
+could use a 'box' to handle everything? kinda funkay though
+.decorate(x); // like a class but not - basically a box
+
+
+
+# element invalidation?
+- possible 'unload/invalidate' function in elements
+- this would allow images to 'halt' any processing they're doing.
+- allow for trigger 'redraw' moments as well
+- basically spawn a thread to handle the image buffer. if unloaded, cancel any work.
+
+alt: element tree - works more like normal gui frameworks where the element isn't recreated.  
+it 'remembers' its position.  measure, arrange, draw.
+
+
+# widget styling
+
+widget
+	id
+	state
+	parent
+	children
+	decorations
+
+decorate, where => use selector.
+
+play with box models? 
+
+## Flexible bits!
+
+### container
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+flex-direction
+- row/col/row-reverse/col-reverse
+
+flex-wrap
+- allow items to 'wrap' if it goes over
+
+justify-content
+- spacing between elements on the main axis.
+- element spacing currently
+
+align-items
+- alignment of items on cross axis
+
+align-content = spacing between 'rows' of data
+- only applicable with flex wrap
+- this is a weird one to even describe... 
+
+### items
+flex 
+- flex factory currently
+
+align-self
+- cross axis alignment
+- ovverides align-items 
+
+flex-order
+- allow items to override order?  (not difficult to do...)
+- but also not particularly useful
